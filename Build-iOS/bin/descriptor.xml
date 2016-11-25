@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension xmlns="http://ns.adobe.com/air/extension/16.0">
+	<id>flymob.com</id>
+	<versionNumber>1.0.0</versionNumber>
+	<platforms>
+
+		<platform name="iPhone-ARM">
+		<applicationDeployment>
+			<nativeLibrary>libFlyMobANE.a</nativeLibrary>
+			<initializer>FlyMobANEExtInitializer</initializer>
+			<finalizer>FlyMobANEExtFinalizer</finalizer>
+		</applicationDeployment>
+		</platform>
+
+		<platform name="default">
+            <applicationDeployment/>
+        </platform>
+
+	</platforms>
+</extension>
