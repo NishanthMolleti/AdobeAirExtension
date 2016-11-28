@@ -5,10 +5,13 @@ package
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
 	
+	
 	public class FlyMobANE extends EventDispatcher
 	{
 		private static var _context:ExtensionContext;
-		private static const EXTENSION_ID:String = "flymob.com";         
+		private static const EXTENSION_ID:String = "flymob.com";    
+		private static var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
+		private static var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1);
 		
 		public function FlyMobANE(target:IEventDispatcher=null)
 		{
@@ -17,7 +20,7 @@ package
 		
 		private static function isSupported():Boolean
 		{
-			if ( Capabilities.manufacturer.indexOf("iOS") > -1 )
+			if ( isIOS || isAndroid )
 			{
 				createExtensionContext();
 				
