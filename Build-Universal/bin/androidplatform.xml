@@ -1,6 +1,7 @@
 <platform xmlns="http://ns.adobe.com/air/extension/16.0">
     <packagedDependencies>
         <packagedDependency>FlyMobSdk.jar</packagedDependency>
+        <packagedDependency>google-play-services.jar</packagedDependency>
     </packagedDependencies>
     <packagedResources>
     </packagedResources>
