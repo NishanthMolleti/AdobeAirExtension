@@ -5,7 +5,7 @@ SWC=$"FlyMobANE.swc"
 LIB=$"libFlyMobANE.a"
 
 IOS=$"library.swf libFlyMobANE.a FlyMobSDK.framework"
-Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar"
+Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar google-play-services.jar"
 DEFAULT=$"library.swf"
 
 AIRSDK=$"/AIR_SDK/bin/adt"
