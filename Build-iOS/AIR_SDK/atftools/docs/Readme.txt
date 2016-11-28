@@ -1,2 +1,0 @@
-Please find ATF Tools user guide at http://www.adobe.com/devnet/archive/flashruntimes/articles/atf-users-guide.html page.
-More information about ATF file format is at http://www.adobe.com/devnet/archive/flashruntimes/articles/atf-file-format.html page.
