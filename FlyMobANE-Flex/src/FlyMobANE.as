@@ -51,20 +51,82 @@ package
 			{
 				_context = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
 				
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidLoadAd);
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidFailToLoadAd);
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidShow);
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidClick);
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidClose);
-				_context.addEventListener(StatusEvent.STATUS, interstitialDidExpire);
-				
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidLoadAd);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidFailToLoadAd);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidShow);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidComplete);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidStart);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidClose);
-				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidExpire);
+				_context.addEventListener(StatusEvent.STATUS, onNativeCallback);
+
+			}
+		}
+		
+		private function onNativeCallback(event:StatusEvent):void
+		{
+			switch (event.code)
+			{
+				// Interstitial
+				case ("interstitialDidLoadAd"):
+				{
+					dispatchEvent(new Event("interstitialDidLoadAd"));
+				}
+					break;
+				case ("interstitialDidFailToLoadAd"):
+				{
+					dispatchEvent(new Event("interstitialDidFailToLoadAd"));
+				}
+					break;
+				case ("interstitialDidShow"):
+				{
+					dispatchEvent(new Event("interstitialDidShow"));
+				}
+					break;
+				case ("interstitialDidClick"):
+				{
+					dispatchEvent(new Event("interstitialDidClick"));
+				}
+					break;
+				case ("interstitialDidClose"):
+				{
+					dispatchEvent(new Event("interstitialDidClose"));
+				}
+					break;
+				case ("interstitialDidExpire"):
+				{
+					dispatchEvent(new Event("interstitialDidExpire"));
+				}
+					break;
+				// Rewarded
+				case ("rewardedVideoDidLoadAd"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidLoadAd"));
+				}
+					break;
+				case ("rewardedVideoDidFailToLoadAd"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidFailToLoadAd"));
+				}
+					break;
+				case ("rewardedVideoDidShow"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidShow"));
+				}
+					break;
+				case ("rewardedVideoDidComplete"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidComplete"));
+				}
+					break;
+				case ("rewardedVideoDidStart"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidStart"));
+				}
+					break;
+				case ("rewardedVideoDidClose"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidClose"));
+				}
+					break;
+				case ("rewardedVideoDidExpire"):
+				{
+					dispatchEvent(new Event("rewardedVideoDidExpire"));
+				}
+					break;
 			}
 		}
 		
@@ -103,38 +165,6 @@ package
 			return false;
 		}
 		
-		// Events
-		
-		private function interstitialDidLoadAd(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidLoadAd"));
-		}
-		
-		private function interstitialDidFailToLoadAd(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidFailToLoadAd"));
-		}
-		
-		private function interstitialDidShow(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidShow"));
-		}
-		
-		private function interstitialDidClick(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidClick"));
-		}
-		
-		private function interstitialDidClose(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidClose"));
-		}
-		
-		private function interstitialDidExpire(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("interstitialDidExpire"));
-		}
-		
 		// Rewarded video
 		
 		public function rewardedVideoInitialize(value:int):void
@@ -168,43 +198,6 @@ package
 				return _context.call("rewardedVideoIsReady") as Boolean;
 			}
 			return false;
-		}
-		
-		// Events
-		
-		private function rewardedVideoDidLoadAd(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidLoadAd"));
-		}
-		
-		private function rewardedVideoDidFailToLoadAd(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidFailToLoadAd"));
-		}
-		
-		private function rewardedVideoDidShow(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidShow"));
-		}
-		
-		private function rewardedVideoDidComplete(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidComplete"));
-		}
-		
-		private function rewardedVideoDidStart(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidStart"));
-		}
-		
-		private function rewardedVideoDidClose(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidClose"));
-		}
-		
-		private function rewardedVideoDidExpire(event:StatusEvent):void
-		{
-			dispatchEvent(new Event("rewardedVideoDidExpire"));
 		}
 		
 		// Configuration
