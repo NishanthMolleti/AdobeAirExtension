@@ -9,14 +9,121 @@
 #import "FlyMobANE.h"
 #import <FlyMobSDK/FlyMobSDK.h>
 
+static FlyMobInterstitial *interstitial;
+static FlyMobANE *interstitialDelegate;
 
-@implementation FlyMobANE
+static FlyMobRewardedVideo *rewardedVideo;
+static FlyMobANE *rewardedVideoDelegate;
+
+static FREContext extensionContext;
+
+@interface FlyMobANE ()
+<
+    FlyMobInterstitialDelegate,
+    FlyMobRewardedVideoDelegate
+>
 
 @end
 
-static FlyMobInterstitial *interstitial;
-static FlyMobRewardedVideo *rewardedVideo;
+@implementation FlyMobANE
 
+#pragma mark - Interstitial
+
+-(void)interstitialDidLoadAd:(FlyMobInterstitial *)interstitial
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidLoadAd" UTF8String],
+                                NULL);
+}
+
+-(void)interstitialDidFailToLoadAd:(FlyMobInterstitial *)interstitial error:(NSError *)error
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidFailToLoadAd" UTF8String],
+                                NULL);
+}
+
+-(void)interstitialDidShow:(FlyMobInterstitial *)interstitial
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidShow" UTF8String],
+                                NULL);
+}
+
+-(void)interstitialDidClick:(FlyMobInterstitial *)interstitial
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidClick" UTF8String],
+                                NULL);
+}
+
+-(void)interstitialDidClose:(FlyMobInterstitial *)interstitial
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidClose" UTF8String],
+                                NULL);
+}
+
+-(void)interstitialDidExpire:(FlyMobInterstitial *)interstitial
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"interstitialDidExpire" UTF8String],
+                                NULL);
+}
+
+#pragma mark - Rewarded
+
+-(void)rewardedVideoDidLoadAd:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidLoadAd" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidFailToLoadAd:(FlyMobRewardedVideo *)rewardedVideo
+                              error:(NSError *)error
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidFailToLoadAd" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidShow:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidShow" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidComplete:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidComplete" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidStart:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidStart" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidClose:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidClose" UTF8String],
+                                NULL);
+}
+
+-(void)rewardedVideoDidExpire:(FlyMobRewardedVideo *)rewardedVideo
+{
+    FREDispatchStatusEventAsync(extensionContext,
+                                (uint8_t *)[@"rewardedVideoDidExpire" UTF8String],
+                                NULL);
+}
+
+@end
 
 #pragma mark - Public methods
 
@@ -32,6 +139,9 @@ FREObject interstitialInitialize(FREContext context,
     FREGetObjectAsInt32(argv[0], &int_zoneID);
     
     interstitial = [FlyMobInterstitial interstitialWithZoneID:(NSUInteger)int_zoneID];
+    interstitialDelegate = [FlyMobANE new];
+    
+    interstitial.delegate = interstitialDelegate;
     
     return nil;
 }
@@ -86,6 +196,9 @@ FREObject rewardedVideoInitialize(FREContext context,
     FREGetObjectAsInt32(argv[0], &int_zoneID);
     
     rewardedVideo = [FlyMobRewardedVideo rewardedVideoWithZoneID:(NSUInteger)int_zoneID];
+    rewardedVideoDelegate = [FlyMobANE new];
+    
+    rewardedVideo.delegate = rewardedVideoDelegate;
     
     return nil;
 }
@@ -241,6 +354,7 @@ void FlyMobANEContextInitializer(void *extData,
                                  uint32_t *numFunctionsToTest,
                                  const FRENamedFunction **functionsToSet)
 {
+    extensionContext = ctx;
     
     *numFunctionsToTest = 16;
     FRENamedFunction *functions = (FRENamedFunction *) malloc(sizeof(FRENamedFunction) * (*numFunctionsToTest));

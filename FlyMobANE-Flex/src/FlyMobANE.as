@@ -1,24 +1,40 @@
 package
 {
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
+	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
 	
 	
 	public class FlyMobANE extends EventDispatcher
 	{
+		private static var _instance:FlyMobANE;
+		
 		private static var _context:ExtensionContext;
 		private static const EXTENSION_ID:String = "flymob.com";    
 		private static var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
 		private static var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1);
 		
-		public function FlyMobANE(target:IEventDispatcher=null)
-		{
-			super(target);
+		public static function getInstance():FlyMobANE{
+			if(!_instance)
+			{
+				new FlyMobANE();
+			} 
+			return _instance;
 		}
 		
-		private static function isSupported():Boolean
+		public function FlyMobANE(target:IEventDispatcher=null)
+		{
+			if(_instance)
+			{
+				throw new Error("Singleton... use getInstance()");
+			} 
+			_instance = this;
+		}
+		
+		private function isSupported():Boolean
 		{
 			if ( isIOS || isAndroid )
 			{
@@ -29,17 +45,32 @@ package
 			return false;
 		}
 		
-		private static function createExtensionContext():void
+		private function createExtensionContext():void
 		{
 			if ( _context == null )
 			{
 				_context = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
+				
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidLoadAd);
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidFailToLoadAd);
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidShow);
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidClick);
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidClose);
+				_context.addEventListener(StatusEvent.STATUS, interstitialDidExpire);
+				
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidLoadAd);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidFailToLoadAd);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidShow);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidComplete);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidStart);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidClose);
+				_context.addEventListener(StatusEvent.STATUS, rewardedVideoDidExpire);
 			}
 		}
 		
 		// Interstitial
 		
-		public static function interstitialInitialize(value:int):void
+		public function interstitialInitialize(value:int):void
 		{        
 			if ( isSupported() )
 			{
@@ -47,7 +78,7 @@ package
 			}
 		}
 		
-		public static function interstitialLoad():void
+		public function interstitialLoad():void
 		{        
 			if ( isSupported() )
 			{
@@ -55,7 +86,7 @@ package
 			}
 		}
 		
-		public static function interstitialShow():void
+		public function interstitialShow():void
 		{        
 			if ( isSupported() )
 			{
@@ -63,7 +94,7 @@ package
 			}
 		}
 		
-		public static function interstitialIsReady():Boolean
+		public function interstitialIsReady():Boolean
 		{        
 			if ( isSupported() )
 			{
@@ -72,9 +103,41 @@ package
 			return false;
 		}
 		
+		// Events
+		
+		private function interstitialDidLoadAd(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidLoadAd"));
+		}
+		
+		private function interstitialDidFailToLoadAd(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidFailToLoadAd"));
+		}
+		
+		private function interstitialDidShow(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidShow"));
+		}
+		
+		private function interstitialDidClick(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidClick"));
+		}
+		
+		private function interstitialDidClose(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidClose"));
+		}
+		
+		private function interstitialDidExpire(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("interstitialDidExpire"));
+		}
+		
 		// Rewarded video
 		
-		public static function rewardedVideoInitialize(value:int):void
+		public function rewardedVideoInitialize(value:int):void
 		{        
 			if ( isSupported() )
 			{
@@ -82,7 +145,7 @@ package
 			}
 		}
 		
-		public static function rewardedVideoLoad():void
+		public function rewardedVideoLoad():void
 		{        
 			if ( isSupported() )
 			{
@@ -90,7 +153,7 @@ package
 			}
 		}
 		
-		public static function rewardedVideoShow():void
+		public function rewardedVideoShow():void
 		{        
 			if ( isSupported() )
 			{
@@ -98,7 +161,7 @@ package
 			}
 		}
 		
-		public static function rewardedVideoIsReady():Boolean
+		public function rewardedVideoIsReady():Boolean
 		{        
 			if ( isSupported() )
 			{
@@ -107,9 +170,46 @@ package
 			return false;
 		}
 		
+		// Events
+		
+		private function rewardedVideoDidLoadAd(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidLoadAd"));
+		}
+		
+		private function rewardedVideoDidFailToLoadAd(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidFailToLoadAd"));
+		}
+		
+		private function rewardedVideoDidShow(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidShow"));
+		}
+		
+		private function rewardedVideoDidComplete(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidComplete"));
+		}
+		
+		private function rewardedVideoDidStart(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidStart"));
+		}
+		
+		private function rewardedVideoDidClose(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidClose"));
+		}
+		
+		private function rewardedVideoDidExpire(event:StatusEvent):void
+		{
+			dispatchEvent(new Event("rewardedVideoDidExpire"));
+		}
+		
 		// Configuration
 		
-		public static function setDebugMode(value:Boolean):void
+		public function setDebugMode(value:Boolean):void
 		{        
 			if ( isSupported() )
 			{
@@ -117,7 +217,7 @@ package
 			}
 		}
 		
-		public static function isDebugMode():Boolean
+		public function isDebugMode():Boolean
 		{        
 			if ( isSupported() )
 			{
@@ -126,7 +226,7 @@ package
 			return false;
 		}
 		
-		public static function setCoppa(value:Boolean):void
+		public function setCoppa(value:Boolean):void
 		{        
 			if ( isSupported() )
 			{
@@ -134,7 +234,7 @@ package
 			}
 		}
 		
-		public static function isCoppa():Boolean
+		public function isCoppa():Boolean
 		{        
 			if ( isSupported() )
 			{
@@ -143,7 +243,7 @@ package
 			return false;
 		}
 		
-		public static function setDnt(value:Boolean):void
+		public function setDnt(value:Boolean):void
 		{        
 			if ( isSupported() )
 			{
@@ -151,7 +251,7 @@ package
 			}
 		}
 		
-		public static function isDnt():Boolean
+		public function isDnt():Boolean
 		{        
 			if ( isSupported() )
 			{
@@ -160,7 +260,7 @@ package
 			return false;
 		}
 		
-		public static function setTesting(value:Boolean):void
+		public function setTesting(value:Boolean):void
 		{        
 			if ( isSupported() )
 			{
@@ -168,7 +268,7 @@ package
 			}
 		}
 		
-		public static function isTesting():Boolean
+		public function isTesting():Boolean
 		{        
 			if ( isSupported() )
 			{
