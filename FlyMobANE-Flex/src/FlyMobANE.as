@@ -2,13 +2,13 @@ package
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
+	//import flash.events.IEventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
 	
 	
-	public class FlyMobANE extends EventDispatcher
+	public final class FlyMobANE extends EventDispatcher
 	{
 		private static var _instance:FlyMobANE;
 		
@@ -17,7 +17,8 @@ package
 		private static var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
 		private static var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1);
 		
-		public static function getInstance():FlyMobANE{
+		public static function getInstance():FlyMobANE
+		{	
 			if(!_instance)
 			{
 				new FlyMobANE();
@@ -25,7 +26,7 @@ package
 			return _instance;
 		}
 		
-		public function FlyMobANE(target:IEventDispatcher=null)
+		public function FlyMobANE()
 		{
 			if(_instance)
 			{
@@ -52,7 +53,6 @@ package
 				_context = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
 				
 				_context.addEventListener(StatusEvent.STATUS, onNativeCallback);
-
 			}
 		}
 		
