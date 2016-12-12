@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd $(dirname $0)
+
+if [ -f "Test.ipa" ]
+then
+	rm Test.ipa
+fi
+
+adt -package -target ipa-ad-hoc -useLegacyAOT no -storetype pkcs12 -keystore certificates/TutoTOONS_dev.p12 -storepass apix -provisioning-profile certificates/TutoTOONS_app_dev.mobileprovision Test.ipa ios.xml Test.swf Default-568h@2x.png -extdir extensions_ios/
+adt -installApp -platform ios -package Test.ipa

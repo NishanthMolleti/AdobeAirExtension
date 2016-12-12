@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd $(dirname $0)
+
+if [ -f "Test.apk" ]
+then
+	rm Test.apk
+fi
+
+adt -package -target apk-captive-runtime -storetype pkcs12 -keystore certificates/android.p12 -storepass test Test.apk android.xml Test.swf -extdir extensions_android/
+adt -uninstallApp -platform android -appid com.tutotoons.app.testas
+adt -installApp -platform android -package Test.apk
+adt -launchApp -platform android -appid com.tutotoons.app.testas

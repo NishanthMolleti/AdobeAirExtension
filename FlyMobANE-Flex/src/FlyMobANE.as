@@ -1,13 +1,11 @@
-package
+﻿package
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	//import flash.events.IEventDispatcher;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	import flash.system.Capabilities;
-	
-	
+		
 	public final class FlyMobANE extends EventDispatcher
 	{
 		private static var _instance:FlyMobANE;
@@ -26,7 +24,7 @@ package
 			return _instance;
 		}
 		
-		public function FlyMobANE()
+		public function FlyMobANE(target:flash.events.IEventDispatcher = null)
 		{
 			if(_instance)
 			{
@@ -53,81 +51,13 @@ package
 				_context = ExtensionContext.createExtensionContext(EXTENSION_ID, null);
 				
 				_context.addEventListener(StatusEvent.STATUS, onNativeCallback);
+				
 			}
 		}
 		
 		private function onNativeCallback(event:StatusEvent):void
 		{
-			switch (event.code)
-			{
-				// Interstitial
-				case ("interstitialDidLoadAd"):
-				{
-					dispatchEvent(new Event("interstitialDidLoadAd"));
-				}
-					break;
-				case ("interstitialDidFailToLoadAd"):
-				{
-					dispatchEvent(new Event("interstitialDidFailToLoadAd"));
-				}
-					break;
-				case ("interstitialDidShow"):
-				{
-					dispatchEvent(new Event("interstitialDidShow"));
-				}
-					break;
-				case ("interstitialDidClick"):
-				{
-					dispatchEvent(new Event("interstitialDidClick"));
-				}
-					break;
-				case ("interstitialDidClose"):
-				{
-					dispatchEvent(new Event("interstitialDidClose"));
-				}
-					break;
-				case ("interstitialDidExpire"):
-				{
-					dispatchEvent(new Event("interstitialDidExpire"));
-				}
-					break;
-				// Rewarded
-				case ("rewardedVideoDidLoadAd"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidLoadAd"));
-				}
-					break;
-				case ("rewardedVideoDidFailToLoadAd"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidFailToLoadAd"));
-				}
-					break;
-				case ("rewardedVideoDidShow"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidShow"));
-				}
-					break;
-				case ("rewardedVideoDidComplete"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidComplete"));
-				}
-					break;
-				case ("rewardedVideoDidStart"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidStart"));
-				}
-					break;
-				case ("rewardedVideoDidClose"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidClose"));
-				}
-					break;
-				case ("rewardedVideoDidExpire"):
-				{
-					dispatchEvent(new Event("rewardedVideoDidExpire"));
-				}
-					break;
-			}
+			this.dispatchEvent(new Event(event.code));
 		}
 		
 		// Interstitial
@@ -246,7 +176,7 @@ package
 		
 		public function isDnt():Boolean
 		{        
-			if ( isSupported() )
+			if ( isSupported() ) 
 			{
 				return _context.call("isDnt") as Boolean;
 			}
