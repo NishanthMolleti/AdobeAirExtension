@@ -33,42 +33,42 @@ static FREContext extensionContext;
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidLoadAd" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)interstitialDidFailToLoadAd:(FlyMobInterstitial *)interstitial error:(NSError *)error
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidFailToLoadAd" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)interstitialDidShow:(FlyMobInterstitial *)interstitial
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidShow" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)interstitialDidClick:(FlyMobInterstitial *)interstitial
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidClick" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)interstitialDidClose:(FlyMobInterstitial *)interstitial
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidClose" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)interstitialDidExpire:(FlyMobInterstitial *)interstitial
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"interstitialDidExpire" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 #pragma mark - Rewarded
@@ -77,7 +77,7 @@ static FREContext extensionContext;
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidLoadAd" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidFailToLoadAd:(FlyMobRewardedVideo *)rewardedVideo
@@ -85,42 +85,42 @@ static FREContext extensionContext;
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidFailToLoadAd" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidShow:(FlyMobRewardedVideo *)rewardedVideo
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidShow" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidComplete:(FlyMobRewardedVideo *)rewardedVideo
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidComplete" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidStart:(FlyMobRewardedVideo *)rewardedVideo
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidStart" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidClose:(FlyMobRewardedVideo *)rewardedVideo
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidClose" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 -(void)rewardedVideoDidExpire:(FlyMobRewardedVideo *)rewardedVideo
 {
     FREDispatchStatusEventAsync(extensionContext,
                                 (uint8_t *)[@"rewardedVideoDidExpire" UTF8String],
-                                NULL);
+                                (uint8_t *)[@"" UTF8String]);
 }
 
 @end
