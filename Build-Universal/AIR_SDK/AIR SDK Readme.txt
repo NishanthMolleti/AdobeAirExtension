@@ -1,4 +1,4 @@
-Adobe AIR 23.0 SDK
+Adobe AIR 21.0 SDK
 README FILE
 
 
@@ -126,10 +126,6 @@ TEMPLATES/AIR
 
  - Descriptor.21.0.xsd - An XML Schema Definition file for the AIR 21.0 application descriptor file.
 
- - Descriptor.22.0.xsd - An XML Schema Definition file for the AIR 22.0 application descriptor file.
-
- - Descriptor.23.0.xsd - An XML Schema Definition file for the AIR 23.0 application descriptor file.
-
  - descriptor-template.xml - A template of the application descriptor file, which is required for each AIR application. 
 
 
@@ -175,10 +171,6 @@ TEMPLATES/EXTENSIONS
 
  - Descriptor.21.0.xsd - An XML Schema Definition file for the AIR 21.0 extension descriptor file. 
 
- - Descriptor.22.0.xsd - An XML Schema Definition file for the AIR 22.0 extension descriptor file. 
-
- - Descriptor.23.0.xsd - An XML Schema Definition file for the AIR 23.0 extension descriptor file. 
-
  - extension-descriptor-template.xml -  A template of the extension descriptor file, which is required for each AIR extension.
 
 
@@ -221,10 +213,6 @@ TEMPLATES/EXTENSIONS/iOS
  - Descriptor.20.0.xsd - An XML Schema Definition file for the AIR 20.0 iOS platform descriptor file. 
 
  - Descriptor.21.0.xsd - An XML Schema Definition file for the AIR 21.0 iOS platform descriptor file. 
-
- - Descriptor.22.0.xsd - An XML Schema Definition file for the AIR 22.0 iOS platform descriptor file. 
-
- - Descriptor.23.0.xsd - An XML Schema Definition file for the AIR 23.0 iOS platform descriptor file. 
 
  - platform-descriptor-template.xml - A template of the iOS platform descriptor file, for iOS platform specific options.
 

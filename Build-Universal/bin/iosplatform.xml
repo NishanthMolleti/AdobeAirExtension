@@ -1,4 +1,4 @@
-<platform xmlns="http://ns.adobe.com/air/extension/23.0"> 
+<platform xmlns="http://ns.adobe.com/air/extension/21.0"> 
     <copyright>2016 FlyMob</copyright> 
     <sdkVersion>1.0.0</sdkVersion> 
     <linkerOptions> 

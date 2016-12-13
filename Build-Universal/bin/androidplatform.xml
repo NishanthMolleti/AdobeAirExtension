@@ -1,4 +1,4 @@
-<platform xmlns="http://ns.adobe.com/air/extension/23.0">
+<platform xmlns="http://ns.adobe.com/air/extension/21.0">
     <packagedDependencies>
         <packagedDependency>FlyMobSdk.jar</packagedDependency>
         <packagedDependency>google-play-services.jar</packagedDependency>
