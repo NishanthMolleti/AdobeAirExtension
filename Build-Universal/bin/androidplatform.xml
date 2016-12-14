@@ -4,5 +4,9 @@
         <packagedDependency>google-play-services.jar</packagedDependency>
     </packagedDependencies>
     <packagedResources>
+        <packagedResource>
+            <packageName>com.flymob.sdk</packageName>
+            <folderName>res</folderName>
+        </packagedResource>
     </packagedResources>
 </platform>

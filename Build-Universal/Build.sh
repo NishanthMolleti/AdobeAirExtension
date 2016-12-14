@@ -4,7 +4,7 @@ ANE=$"FlyMobExtension.ane"
 SWC=$"FlyMobANE.swc"
 
 IOS=$"library.swf libFlyMobANE.a FlyMobSDK.framework"
-Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar google-play-services.jar"
+Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar google-play-services.jar -C ./res/"
 DEFAULT=$"library.swf"
 
 AIRSDK=$"/AIR_SDK/bin/adt"
@@ -29,8 +29,8 @@ echo "Compiling..."
 
 "$ADT" -package -target ane $ANE descriptor.xml -swc $SWC \
 				-platform iPhone-ARM -platformoptions $IOS_OPTIONS $IOS \
-				-platform Android-ARM -platformoptions $ANDROID_OPTIONS $Android \
 				-platform Android-x86 -platformoptions $ANDROID_OPTIONS $Android \
+				-platform Android-ARM -platformoptions $ANDROID_OPTIONS $Android \
 				-platform default $DEFAULT
 
 cp $ANE $DIR
