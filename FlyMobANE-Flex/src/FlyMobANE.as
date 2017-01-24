@@ -105,14 +105,6 @@
 			}
 		}
 		
-		public function rewardedVideoLoad():void
-		{        
-			if ( isSupported() )
-			{
-				_context.call("rewardedVideoLoad");
-			}
-		}
-		
 		public function rewardedVideoShow():void
 		{        
 			if ( isSupported() )
