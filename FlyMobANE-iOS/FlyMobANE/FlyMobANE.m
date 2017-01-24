@@ -195,23 +195,11 @@ FREObject rewardedVideoInitialize(FREContext context,
     int32_t int_zoneID;
     FREGetObjectAsInt32(argv[0], &int_zoneID);
     
-    rewardedVideo = [FlyMobRewardedVideo rewardedVideoWithZoneID:(NSUInteger)int_zoneID];
+    [FlyMobRewardedVideo initialize:(NSUInteger)int_zoneID];
+    
     rewardedVideoDelegate = [FlyMobANE new];
     
-    rewardedVideo.delegate = rewardedVideoDelegate;
-    
-    return nil;
-}
-
-FREObject rewardedVideoLoad(FREContext context,
-                            void *functionData,
-                            uint32_t argc,
-                            FREObject argv[])
-{
-    if (rewardedVideo)
-    {
-        [rewardedVideo loadAd];
-    }
+    [FlyMobRewardedVideo setDelegate:rewardedVideoDelegate];
     
     return nil;
 }
@@ -221,9 +209,9 @@ FREObject rewardedVideoShow(FREContext context,
                             uint32_t argc,
                             FREObject argv[])
 {
-    if (rewardedVideo.isReady)
+    if ([FlyMobRewardedVideo isReady])
     {
-        [rewardedVideo showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        [FlyMobRewardedVideo showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
     }
     
     return nil;
@@ -236,7 +224,7 @@ FREObject rewardedVideoIsReady(FREContext context,
 {
     FREObject isReady = NULL;
     
-    FRENewObjectFromBool(rewardedVideo.isReady, &isReady);
+    FRENewObjectFromBool([FlyMobRewardedVideo isReady], &isReady);
     
     return isReady;
 }
@@ -356,7 +344,7 @@ void FlyMobANEContextInitializer(void *extData,
 {
     extensionContext = ctx;
     
-    *numFunctionsToTest = 16;
+    *numFunctionsToTest = 15;
     FRENamedFunction *functions = (FRENamedFunction *) malloc(sizeof(FRENamedFunction) * (*numFunctionsToTest));
     
     // Interstitial
@@ -381,50 +369,46 @@ void FlyMobANEContextInitializer(void *extData,
     functions[4].functionData = NULL;
     functions[4].function = &rewardedVideoInitialize;
     
-    functions[5].name = (const uint8_t*) "rewardedVideoLoad";
+    functions[5].name = (const uint8_t*) "rewardedVideoShow";
     functions[5].functionData = NULL;
-    functions[5].function = &rewardedVideoLoad;
+    functions[5].function = &rewardedVideoShow;
     
-    functions[6].name = (const uint8_t*) "rewardedVideoShow";
+    functions[6].name = (const uint8_t*) "rewardedVideoIsReady";
     functions[6].functionData = NULL;
-    functions[6].function = &rewardedVideoShow;
-    
-    functions[7].name = (const uint8_t*) "rewardedVideoIsReady";
-    functions[7].functionData = NULL;
-    functions[7].function = &rewardedVideoIsReady;
+    functions[6].function = &rewardedVideoIsReady;
     
     // Configuration
-    functions[8].name = (const uint8_t*) "setDebugMode";
+    functions[7].name = (const uint8_t*) "setDebugMode";
+    functions[7].functionData = NULL;
+    functions[7].function = &setDebugMode;
+    
+    functions[8].name = (const uint8_t*) "isDebugMode";
     functions[8].functionData = NULL;
-    functions[8].function = &setDebugMode;
+    functions[8].function = &isDebugMode;
     
-    functions[9].name = (const uint8_t*) "isDebugMode";
+    functions[9].name = (const uint8_t*) "setCoppa";
     functions[9].functionData = NULL;
-    functions[9].function = &isDebugMode;
+    functions[9].function = &setCoppa;
     
-    functions[10].name = (const uint8_t*) "setCoppa";
+    functions[10].name = (const uint8_t*) "isCoppa";
     functions[10].functionData = NULL;
-    functions[10].function = &setCoppa;
+    functions[10].function = &isCoppa;
     
-    functions[11].name = (const uint8_t*) "isCoppa";
+    functions[11].name = (const uint8_t*) "setDnt";
     functions[11].functionData = NULL;
-    functions[11].function = &isCoppa;
+    functions[11].function = &setDnt;
     
-    functions[12].name = (const uint8_t*) "setDnt";
+    functions[12].name = (const uint8_t*) "isDnt";
     functions[12].functionData = NULL;
-    functions[12].function = &setDnt;
+    functions[12].function = &isDnt;
     
-    functions[13].name = (const uint8_t*) "isDnt";
+    functions[13].name = (const uint8_t*) "setTesting";
     functions[13].functionData = NULL;
-    functions[13].function = &isDnt;
+    functions[13].function = &setTesting;
     
-    functions[14].name = (const uint8_t*) "setTesting";
+    functions[14].name = (const uint8_t*) "isTesting";
     functions[14].functionData = NULL;
-    functions[14].function = &setTesting;
-    
-    functions[15].name = (const uint8_t*) "isTesting";
-    functions[15].functionData = NULL;
-    functions[15].function = &isTesting;
+    functions[14].function = &isTesting;
     
     *functionsToSet = functions;
     
