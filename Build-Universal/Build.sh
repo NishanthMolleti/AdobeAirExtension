@@ -4,7 +4,7 @@ ANE=$"FlyMobExtension.ane"
 SWC=$"FlyMobANE.swc"
 
 IOS=$"library.swf libFlyMobANE.a FlyMobSDK.framework"
-Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar play-services-ads-8.4.0.jar play-services-basement-8.4.0.jar -C ./res/ ."
+Android=$"library.swf ANEFlyMobSdk.jar FlyMobSdk.jar play-services-ads-8.4.0.jar play-services-basement-8.4.0.jar android-support-v4.jar -C ./res/ ."
 DEFAULT=$"library.swf"
 
 AIRSDK=$"/AIR_SDK/bin/adt"
